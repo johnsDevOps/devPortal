@@ -1,5 +1,5 @@
-import { GET_PROFILE, PROFILE_ERROR } from '../actions/types'
-import { STATES } from 'mongoose'
+import {GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE} from '../actions/types'
+import {STATES} from 'mongoose'
 
 const initialState = {
   profile: null,
@@ -10,7 +10,7 @@ const initialState = {
 }
 
 export default function (state = initialState, action) {
-  const { type, payload } = action
+  const {type, payload} = action
   switch (type) {
     case GET_PROFILE:
       return {
@@ -22,6 +22,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         error: payload,
+        loading: false,
+      }
+
+    case CLEAR_PROFILE:
+      return {
+        ...state,
+        profile: null,
+        repos: [],
         loading: false,
       }
     default:
